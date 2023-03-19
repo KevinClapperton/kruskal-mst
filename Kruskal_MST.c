@@ -1,14 +1,15 @@
-#include<stdio.h>
-#include<stdlib.h>
-#define M 20
-
 /*
 ** Program to find minimum spanning tree using Kruskal Algorithm with Union-Find method
 ** Made by - Abhishek Chand
 */
 
-int parent[M],rank[M];
+#include<stdio.h>
+#include<stdlib.h>
 
+//*************************** DEFINE AND STRUCTS *************************** //
+#define TEST_KRUSKAL
+#define N_VERTEX 3
+#define N_EDGES 3
 typedef struct EDGE
 {
 	int u;
@@ -16,30 +17,44 @@ typedef struct EDGE
 	int w;
 }Edge;
 
-void swap(Edge *x,Edge *y)
-{
+//*************************** PRIVATE VARIABLES **************************** //
+int parent[N_VERTEX],rank[N_VERTEX];
+
+Edge E[] = { 
+	#include "in.data"
+};
+
+Edge REF_OUT[] = { 
+	#include "refout.data"
+};
+
+Edge OUT[N_VERTEX-1]; 
+
+//******************************* FUNCTIONS ******************************** //
+void swap(Edge *x,Edge *y){
 	Edge temp;
 	temp=*x;
 	*x=*y;
 	*y=temp;
 }
 
-void printMST(Edge *T,int n)
-{
-	int i,cost=0;
-	printf("Selected Edges:\nu  v  w\n");
-	for(i=0;i<n;i++)
-	{
-		printf("%d  %d  %d\n",T[i].u,T[i].v,T[i].w);
-		cost+=T[i].w;
-	}
-	printf("\nCost = %d",cost);
-}
+// void printMST(Edge *T,int n)
+// {
+// 	int i,cost=0;
+// 	printf("Selected Edges:\nu  v  w\n");
+// 	for(i=0;i<n;i++)
+// 	{
+// 		printf("%d  %d  %d\n",T[i].u,T[i].v,T[i].w);
+// 		cost+=T[i].w;
+// 	}
+// 	printf("\nCost = %d",cost);
+// }
 
 int partition(Edge *A,int beg,int end)
 {
-	int i,p=beg,pivot=A[end].w;
-	for(i=beg;i<end;i++)
+	printf("partition\n");
+	int i,p=beg,pivot=A[end].w; // The pivot is always the last one
+	for(i=beg;i<end;i++) // Partitioning is theta(n)
 	{
 		if(A[i].w<=pivot)
 		{
@@ -51,29 +66,24 @@ int partition(Edge *A,int beg,int end)
 	return p;
 }
 
-void QuickSort(Edge *A,int beg,int end)
-{
+void quicksort(Edge *A,int beg,int end){
 	int q;
 	if(beg>=end)
 		return;
 	q=partition(A,beg,end);
-	QuickSort(A,beg,q-1);
-	QuickSort(A,q+1,end);
-	
+	quicksort(A,beg,q-1);
+	quicksort(A,q+1,end);
 }
 
-int find(int u)
-{
-	int i=0,A[M];
-	while(u!=parent[u])
-	{
+int find(int u, int *p){
+	int i=0,A[N_VERTEX];
+	while(u!=parent[u]){
 		A[i]=u;
 		u=parent[u];
 		i++;
 	}
 	i--;
-	while(i>=0)
-	{
+	while(i>=0){
 		parent[A[i]]=u;
 		i--;
 	}
@@ -82,9 +92,10 @@ int find(int u)
 
 void unionbyrank(int u, int v)
 {
+	printf("unionbyrank\n");
 	int x,y;
-	x=find(u);
-	y=find(v);
+	x=find(u, parent);
+	y=find(v, parent);
 	if(rank[x]<rank[y])
 		parent[x]=y;
 	else if(rank[y]<rank[x])
@@ -96,13 +107,16 @@ void unionbyrank(int u, int v)
 	}
 }
 
-void Kruskal(Edge *E,int n,int e)
+void Kruskal(Edge *E,int n,int e, Edge *T)
 {
+	for(int i=1;i<N_VERTEX+1;i++)
+	{
+		parent[i]=i;
+		rank[i]=0;
+	}
+	
 	int i,j,x,y,u,v;
-	Edge *T;
-	T=(Edge*)malloc((n-1)*sizeof(Edge));
-	QuickSort(E,0,e-1);
-	//printMST(E,e);
+	quicksort(E,0,e-1);
 	j=0;
 	for(i=0;i<e;i++)
 	{
@@ -110,8 +124,8 @@ void Kruskal(Edge *E,int n,int e)
 			break;
 		u=E[i].u;
 		v=E[i].v;
-		x=find(u);
-		y=find(v);
+		x=find(u, parent);
+		y=find(v, parent);
 		if(x!=y)
 		{
 			T[j]=E[i];
@@ -119,35 +133,32 @@ void Kruskal(Edge *E,int n,int e)
 			j++;
 		}
 	}
-	
-	printMST(T,n-1);
 }
 
-int main()
-{
-	int i,j,k,n,e,w;
-	Edge *E;
-	printf("Enter the no. of vertex:");
-	scanf("%d",&n);
-	printf("\nEnter the no. of edges:");
-	scanf("%d",&e);
-	
-	E=(Edge*)malloc(e*sizeof(Edge));
-	
-	for(i=1;i<n+1;i++)
-	{
-		parent[i]=i;
-		rank[i]=0;
+int run_kruskal(){ 
+	Kruskal(E, N_VERTEX, N_EDGES, OUT);
+
+	int n_errors=0;
+  	for (int i=0; i<(N_VERTEX-1); i++) {
+		if (
+			OUT[i].u != REF_OUT[i].u 
+			|| OUT[i].v != REF_OUT[i].v 
+			|| OUT[i].w != REF_OUT[i].w) {
+			n_errors++;
+		}
 	}
-	
-	for(k=0;k<e;k++)
-	{
-		printf("\nEnter an edge(in form i j w):");
-		scanf("%d %d %d",&i,&j,&w);
-		E[k].u=i;
-		E[k].v=j;
-		E[k].w=w;
+	if (n_errors==0) {
+		printf("OK (nr=%d)\n",sizeof(REF_OUT)/sizeof(Edge));
 	}
-	
-	Kruskal(E,n,e);
+	else {
+		printf("ERROR (nr=%d)\n",n_errors);
+	}
+	return n_errors;
 }
+
+#ifdef TEST_KRUSKAL
+
+int main(){ 
+	return run_kruskal();
+}
+#endif
