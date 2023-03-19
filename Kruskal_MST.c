@@ -8,8 +8,8 @@
 
 //*************************** DEFINE AND STRUCTS *************************** //
 #define TEST_KRUSKAL
-#define N_VERTEX 3
-#define N_EDGES 3
+#define N_VERTEX 5
+#define N_EDGES 9
 typedef struct EDGE
 {
 	int u;
@@ -38,21 +38,20 @@ void swap(Edge *x,Edge *y){
 	*y=temp;
 }
 
-// void printMST(Edge *T,int n)
-// {
-// 	int i,cost=0;
-// 	printf("Selected Edges:\nu  v  w\n");
-// 	for(i=0;i<n;i++)
-// 	{
-// 		printf("%d  %d  %d\n",T[i].u,T[i].v,T[i].w);
-// 		cost+=T[i].w;
-// 	}
-// 	printf("\nCost = %d",cost);
-// }
+void printMST(Edge *T,int n)
+{
+	int i,cost=0;
+	printf("Selected Edges:\nu  v  w\n");
+	for(i=0;i<n;i++)
+	{
+		printf("%d  %d  %d\n",T[i].u,T[i].v,T[i].w);
+		cost+=T[i].w;
+	}
+	printf("\nCost = %d",cost);
+}
 
 int partition(Edge *A,int beg,int end)
 {
-	printf("partition\n");
 	int i,p=beg,pivot=A[end].w; // The pivot is always the last one
 	for(i=beg;i<end;i++) // Partitioning is theta(n)
 	{
@@ -92,7 +91,6 @@ int find(int u, int *p){
 
 void unionbyrank(int u, int v)
 {
-	printf("unionbyrank\n");
 	int x,y;
 	x=find(u, parent);
 	y=find(v, parent);
