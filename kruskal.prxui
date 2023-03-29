@@ -1,0 +1,81 @@
+<prxusersettings>
+    <zlayout>
+        <perspective type="dev">
+            <VerPaneNode>
+                <HorPaneNode size="2">
+                    <ViewBookNode size="2">
+                        <window name="ProjectView" visible="1" select="1"/>
+                        <window name="SrcRefView" visible="0" select="0"/>
+                    </ViewBookNode>
+                    <EditorBookNode size="3">
+                        <window name="editor0" visible="1" select="1"/>
+                        <window name="editor1" visible="1" select="0"/>
+                        <window name="editor2" visible="1" select="0"/>
+                    </EditorBookNode>
+                </HorPaneNode>
+                <ViewBookNode size="1">
+                    <window name="ConsoleView" visible="1" select="1"/>
+                </ViewBookNode>
+            </VerPaneNode>
+        </perspective>
+        <perspective type="iss">
+            <HorPaneNode>
+                <VerPaneNode size="3">
+                    <ViewBookNode size="3">
+                        <window name="ProjectView" visible="0" select="0"/>
+                        <window name="MicView" visible="1" select="1"/>
+                    </ViewBookNode>
+                    <ViewBookNode size="2">
+                        <window name="StatsView" visible="1" select="1"/>
+                        <window name="RegisterView" visible="1" select="0"/>
+                        <window name="StorageView" visible="0" select="0"/>
+                        <window name="PipelineView" visible="0" select="0"/>
+                    </ViewBookNode>
+                </VerPaneNode>
+                <VerPaneNode size="4">
+                    <EditorBookNode size="446">
+                        <window name="editor0" visible="1" select="1"/>
+                        <window name="editor1" visible="1" select="0"/>
+                        <window name="editor2" visible="1" select="0"/>
+                    </EditorBookNode>
+                    <ViewBookNode size="408">
+                        <window name="HostedIOView" visible="1" select="0"/>
+                        <window name="FileIOView" visible="0" select="0"/>
+                        <window name="VarInfoView" visible="0" select="0"/>
+                        <window name="LocalVarView" visible="1" select="0"/>
+                        <window name="BreakWatchView" visible="0" select="0"/>
+                        <window name="ProfilingView" visible="1" select="1"/>
+                    </ViewBookNode>
+                    <ViewBookNode size="142">
+                        <window name="ConsoleView" visible="1" select="1"/>
+                    </ViewBookNode>
+                </VerPaneNode>
+            </HorPaneNode>
+        </perspective>
+        <editor id="editor0" file="Kruskal_MST.c" top="21.0" cursor="37.7" foldmap="1" linemap="0"/>
+        <editor id="editor1" file="../../lib/trv32p3_init.s" top="1.0" cursor="1.0" foldmap="1" linemap="0"/>
+        <editor id="editor2" file="../../lib/trv32p3_basic.c" top="1.0" cursor="1.1" foldmap="1" linemap="0"/>
+    </zlayout>
+    <active cfg="Release" dbg="default"/>
+    <selectsim type="ISSCA" exe="&lt;PROCDIR&gt;/../iss/trv32p3_ca_dbg"/>
+    <issui>iss varinfo::locals last_sort {1 -increasing}
+iss profiling storage_access_history_logging Off
+iss registers isvisible {div controller RegistersDec Registers RegistersHex} notvisible {}
+iss storages isvisible {} notvisible {}
+iss varinfo::statics last_sort {1 -increasing}
+iss memory::DMw_stat start_field 0 vector 0
+iss memory::dm_wbb__edm_strb_ff start_field 0 vector 1
+iss memory::DMh_stat start_field 0 vector 0
+iss memory::DMh start_field 0 vector 0
+iss memory::controller__reg_ibuf start_field 0 vector 1
+iss memory::wDM start_field 0 vector 1
+iss memory::dm_wbb__edm_data_ff start_field 0 vector 1
+iss memory::ePM start_field 0 vector 1
+iss memory::DMw start_field 0 vector 0
+iss memory::DMb start_field 0 vector 0
+iss memory::PM start_field 0 vector 0
+iss memory::eDM start_field 0 vector 1
+iss memory::PMb start_field 0 vector 0
+iss profiling value(stepped) 1 value(profile_storages) {__mcs9_guard__ld_pm__ __mcs____pid_D1_r__1__1_delayed controller__FPC controller__reg_booting controller__reg_fetch controller__reg_ibuf controller__reg_ibuf_cnt div__B div__cnt div__is_div div__is_neg div__PA div__Q_addr_reg dm_merge__col_ff dm_merge__st_ff dm_wbb__edm_addr_ff dm_wbb__edm_addr_match_ff dm_wbb__edm_data_ff dm_wbb__edm_strb_ff dm_wbb__edm_wbb_ff dm_wbb__st_edm_ff DMb DMb_stat DMh DMh_stat DMw DMw_stat LR PC pid_PC pif_PC PM PMb SP X x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16 x17 x18 x19 x20 x21 x22 x23 x24 x25 x26 x27 x28 x29 x30 x31 zero}
+iss waveform vars {{time {} {}}} signal_info {time {color green num_format %x} {time {} {}} {color green num_format %x}} samples 16</issui>
+</prxusersettings>
