@@ -10,6 +10,8 @@
 #define TEST_KRUSKAL
 #define N_VERTEX 500
 #define N_EDGES 50000
+#define USE_CUSTOM_INSTRUCTION
+#define swapHw(a,b) swap_hw(a,b,a,b)
 typedef struct EDGE
 {
 	int u;
@@ -32,10 +34,16 @@ Edge OUT[N_VERTEX-1];
 
 //******************************* FUNCTIONS ******************************** //
 void swap(Edge *x,Edge *y){
+#ifdef USE_CUSTOM_INSTRUCTION
+	swapHw(x->u, y->u);
+	swapHw(x->v, y->v);
+	swapHw(x->w, y->w);
+#else
 	Edge temp;
 	temp=*x;
 	*x=*y;
 	*y=temp;
+#endif
 }
 
 void printMST(Edge *T,int n)
