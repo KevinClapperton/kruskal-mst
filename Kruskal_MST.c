@@ -8,8 +8,8 @@
 
 //*************************** DEFINE AND STRUCTS *************************** //
 #define TEST_KRUSKAL
-#define N_VERTEX 5
-#define N_EDGES 9
+#define N_VERTEX 500
+#define N_EDGES 50000
 typedef struct EDGE
 {
 	int u;
@@ -115,6 +115,7 @@ void Kruskal(Edge *E,int n,int e, Edge *T)
 	
 	int i,j,x,y,u,v;
 	quicksort(E,0,e-1);
+
 	j=0;
 	for(i=0;i<e;i++)
 	{
@@ -146,7 +147,7 @@ int run_kruskal(){
 		}
 	}
 	if (n_errors==0) {
-		printf("OK (nr=%d)\n",sizeof(REF_OUT)/sizeof(Edge));
+		printf("OK (nr=%ld)\n",sizeof(REF_OUT)/sizeof(Edge));
 	}
 	else {
 		printf("ERROR (nr=%d)\n",n_errors);
