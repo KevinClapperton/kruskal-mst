@@ -23,11 +23,11 @@ typedef struct EDGE
 int parent[N_VERTEX],rank[N_VERTEX];
 
 Edge E[] = { 
-	#include "in.data"
+	#include "resources/graph0.data"
 };
 
 Edge REF_OUT[] = { 
-	#include "refout.data"
+	#include "resources/mst0.data"
 };
 
 Edge OUT[N_VERTEX-1]; 
